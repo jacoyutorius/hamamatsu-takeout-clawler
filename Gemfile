@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem "httparty"
+# gem "httparty"
 
-group :test do
-  gem "test-unit"
-  gem "mocha"
-end
+# group :test do
+#   gem "test-unit"
+#   gem "mocha"
+# end
