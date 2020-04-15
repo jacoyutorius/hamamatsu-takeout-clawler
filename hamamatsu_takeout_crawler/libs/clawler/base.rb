@@ -5,6 +5,18 @@ require 'uri'
 module HamamatsuTakeout
   module Clawler
     class Base
+      def self.run!
+        instance = self.new
+        shop_urls = instance.scrape_shops
+        shop_urls.map do |page|
+          instance.scrape_details(page)
+        end
+      end
+
+      def scrape_details(page)
+        raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
+      end
+
       def scrape_shops
         raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
       end
@@ -40,5 +52,3 @@ module HamamatsuTakeout
     end
   end
 end
-
-

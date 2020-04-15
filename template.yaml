@@ -26,21 +26,35 @@ Resources:
         - AttributeName: site
           KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
-  HamamatsuTakeoutClawlerFunction:
+  TakeoutableShopsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hamamatsu_takeout_clawler/
+      CodeUri: hamamatsu_takeout_crawler/
       Handler: app.lambda_handler
       Runtime: ruby2.5
       Events:
-        HamamatsuTakeoutClawler:
+        ShopsApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /
+            Path: /shops
             Method: get
+  TakeoutableShopCrawlerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hamamatsu_takeout_crawler/
+      Handler: crawler.lambda_handler
+      Runtime: ruby2.5
+      Events:
+        ShopCrawler:
+          Type: Schedule
+          Properties:
+            Schedule: rate(12 hours)
+            Name: HamamatsuTakeoutableShopCrawler
+            Description: run crawler
+            Enabled: True
 
 Outputs:
-  HamamatsuTakeoutClawlerApi:
+  HamamatsuTakeoutableShopsApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

@@ -241,6 +241,6 @@ $RECYCLE.BIN/
 
 */build/*
 
-hamamatsu_takeout_clawler/.bundle
+hamamatsu_takeout_crawler/.bundle
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
