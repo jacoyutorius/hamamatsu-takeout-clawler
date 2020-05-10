@@ -15,6 +15,7 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.1.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
+    geocoder (1.6.3)
     jmespath (1.4.0)
     mini_portile2 (2.4.0)
     nokogiri (1.10.9)
@@ -25,6 +26,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-record
+  geocoder
   nokogiri
 
 RUBY VERSION

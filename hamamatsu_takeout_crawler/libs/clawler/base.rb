@@ -1,6 +1,14 @@
 require "nokogiri"
 require 'open-uri'
 require 'uri'
+require 'geocoder'
+
+Geocoder.configure(
+  lookup: :google,
+  api_key: "",
+  timeout: 10,
+  units: :km
+)
 
 module HamamatsuTakeout
   module Clawler
@@ -8,7 +16,7 @@ module HamamatsuTakeout
       attr_accessor :page_max
 
       def initialize(params)
-        @page_max = params.fetch(:page_max, 10)
+        @page_max = params.fetch(:page_max, 20)
       end
 
       def self.run!(params={})
@@ -17,7 +25,7 @@ module HamamatsuTakeout
         shop_urls.map do |page|
           # p "name: #{page[:name]}"
           instance.scrape_details(page)
-        end
+        end.compact
       end
 
       def scrape_details(page)
@@ -33,6 +41,11 @@ module HamamatsuTakeout
       end
 
       private
+
+      def fetch_geocode(address)
+        results = Geocoder.search(address)
+        results.first.coordinates
+      end
 
       def html_documents
         return [html_document(base_url)] if pages.empty?

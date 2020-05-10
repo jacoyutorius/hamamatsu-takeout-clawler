@@ -5,18 +5,27 @@ module HamamatsuTakeout
     class TakeoutHamamatsu < Base
       def scrape_details page
         address_node = page[:document].css(".single-contents > p > a")[0]
+        address = format_address(address_node)
+        return nil if address.nil?
+
         phone_node = page[:document].css(".single-contents > p > a")[1]
         description = format_description(page[:document].css(".single-contents > p"))
+        geocode = fetch_geocode(address)
 
         {
           name: page[:name],
           url: page[:url],
           site: page[:site],
-          address: format_address(address_node),
+          address: address,
           map_url: address_node.attribute("href").value,
           phone: phone_node&.text,
-          description: description
+          description: description,
+          latitude: geocode[0],
+          longitude: geocode[1]
         }
+      rescue => error
+        p "#{page} #{error}"
+        nil
       end
 
       def scrape_shops
@@ -70,5 +79,6 @@ module HamamatsuTakeout
   end
 end
 
-# puts ::HamamatsuTakeout::Clawler::TakeoutHamamatsu.run!
-
+if __FILE__ == $0
+  puts ::HamamatsuTakeout::Clawler::TakeoutHamamatsu.run!(page_max: 2)
+end

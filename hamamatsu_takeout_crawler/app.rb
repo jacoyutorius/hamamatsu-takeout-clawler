@@ -15,6 +15,8 @@ def lambda_handler(event:, context:)
       address: row.address,
       phone: row.phone,
       description: row.description,
+      latitude: row.latitude,
+      longitude: row.longitude,
       updated_at: row.updated_at
     }
   end

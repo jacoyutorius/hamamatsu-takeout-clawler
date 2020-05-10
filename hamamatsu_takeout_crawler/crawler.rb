@@ -22,6 +22,8 @@ def update(shop_data)
     record.address = row[:address]
     record.phone = row[:phone]
     record.description = row[:description]
+    record.latitude = row[:latitude]
+    record.longitude = row[:longitude]
     record.updated_at = Time.now
     result = record.save
     
@@ -33,7 +35,8 @@ end
 private
 
 def shop_data
-  @shop_data ||= [].concat(takeout_hamamatsu, machimeshi)
+  # @shop_data ||= [].concat(takeout_hamamatsu, machimeshi)
+  @shop_data ||= [].concat(takeout_hamamatsu)
 end
 
 def machimeshi

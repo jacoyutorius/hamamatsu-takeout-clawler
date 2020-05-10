@@ -13,6 +13,8 @@ module HamamatsuTakeout
       string_attr :phone
       list_attr :description
       string_attr :updated_at
+      float_attr :latitude
+      float_attr :longitude
 
       set_table_name "TakeoutableShops"
     end
