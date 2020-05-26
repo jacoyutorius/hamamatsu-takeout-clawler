@@ -16,7 +16,7 @@ module HamamatsuTakeout
       attr_accessor :page_max
 
       def initialize(params)
-        @page_max = params.fetch(:page_max, 20)
+        @page_max = params.fetch(:page_max, 40)
       end
 
       def self.run!(params={})

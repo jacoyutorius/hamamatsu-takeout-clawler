@@ -12,9 +12,11 @@ end
 
 def update(shop_data)
   shop_data.each do |row|
-    record = ::HamamatsuTakeout::Models::TakeoutableShop.find(name: row[:name], site: row[:site])
+    id = "#{row[:name]}-#{row[:site]}"
+    record = ::HamamatsuTakeout::Models::TakeoutableShop.find(id: id)
     record ||= ::HamamatsuTakeout::Models::TakeoutableShop.new
 
+    record.id = id
     record.name = row[:name]
     record.site = row[:site]
     record.url = row[:url]
@@ -35,8 +37,8 @@ end
 private
 
 def shop_data
-  # @shop_data ||= [].concat(takeout_hamamatsu, machimeshi)
-  @shop_data ||= [].concat(takeout_hamamatsu)
+  @shop_data ||= [].concat(takeout_hamamatsu, machimeshi)
+  # @shop_data ||= [].concat(takeout_hamamatsu)
 end
 
 def machimeshi

@@ -80,5 +80,5 @@ module HamamatsuTakeout
 end
 
 if __FILE__ == $0
-  puts ::HamamatsuTakeout::Clawler::TakeoutHamamatsu.run!(page_max: 2)
+  puts ::HamamatsuTakeout::Clawler::TakeoutHamamatsu.run!(page_max: 30)
 end

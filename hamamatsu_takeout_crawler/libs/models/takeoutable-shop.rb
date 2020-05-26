@@ -5,8 +5,11 @@ module HamamatsuTakeout
     class TakeoutableShop
       include Aws::Record
 
-      string_attr :name, hash_key: true
-      string_attr :site, range_key: true
+      string_attr :id, hash_key: true
+      string_attr :name
+      string_attr :site
+      # string_attr :name, hash_key: true
+      # string_attr :site, range_key: true
       string_attr :url
       string_attr :map_url
       string_attr :address
@@ -16,7 +19,7 @@ module HamamatsuTakeout
       float_attr :latitude
       float_attr :longitude
 
-      set_table_name "TakeoutableShops"
+      set_table_name "TakeoutableShop-axo3xidix5hnnkueirtxnurp3i-develop"
     end
   end
 end
