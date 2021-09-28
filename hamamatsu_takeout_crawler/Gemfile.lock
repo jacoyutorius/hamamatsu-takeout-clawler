@@ -17,9 +17,11 @@ GEM
       aws-eventstream (~> 1.0, >= 1.0.2)
     geocoder (1.6.3)
     jmespath (1.4.0)
-    mini_portile2 (2.4.0)
-    nokogiri (1.10.9)
-      mini_portile2 (~> 2.4.0)
+    mini_portile2 (2.6.1)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
+      racc (~> 1.4)
+    racc (1.5.2)
 
 PLATFORMS
   ruby
